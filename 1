@@ -1,0 +1,26 @@
+<script> 
+// Функция для получения значения параметра из URL 
+function getParameterByName(name, url = window.location.href) { 
+    name = name.replace(/[\[\]]/g, '\\$&'); 
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'), 
+        results = regex.exec(url); 
+    if (!results) return null; 
+    if (!results[2]) return ''; 
+    return decodeURIComponent(results[2].replace(/\+/g, ' ')); 
+} 
+ 
+// Объект с соответствиями utm_term и URL для редиректа 
+const redirectMap = { 
+    '36624938042': '/tproduct/368371303452-radialnie-opravki-levie-korotkie-vdi-b3', 
+    '36264200431': '/tproduct/579863714382-blok-privodnoi-radialnii-vdi40-5480-er32' 
+    // Добавьте сюда остальные соответствия 
+}; 
+ 
+// Получаем значение utm_term 
+const utmTerm = getParameterByName('utm_term'); 
+ 
+// Если utm_term есть в нашей карте редиректов, выполняем переадресацию 
+if (utmTerm && redirectMap[utmTerm]) { 
+    window.location.href = redirectMap[utmTerm]; 
+} 
+</script>
